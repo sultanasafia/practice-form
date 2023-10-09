@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <h1 id="heading">Signup </h1>
+    <form id="signup-form">
+      <input type="text" id="firstName" name="first-name" minlength="3" maxlength="20" required placeholder="First Name" />
+      <br />
+      <input type="text" id="lastName" name="last-name" minlength="1" maxlength="20" required placeholder="Last Name"/>
+      <br />
+      <input type="email" id="email" name="email" required placeholder="Email"/>
+      <br />
+      <input type="password" id="password" name="password" minlength="6" required placeholder="Password"/>
+      <br />
+      <input type="password" id="repeatPassword" name="repeat-password" required placeholder="Repeat Password"/>
+      <br />
+      <button type="submit" id="submit">Sign Up</button>
+    </form>
+    <!-- button -->
+<button><a href="login.html">Goto login</a> </button>
+
+
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
+// import { getDatabase,ref,set,get,child } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
+// import {getStorage, ref as storageRef, uploadBytes, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-storage.js"
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDHevXDhFPArnT7YT1k71j5bImLBYb1Yjc",
+      authDomain: "hecathon-d404c.firebaseapp.com",
+      projectId: "hecathon-d404c",
+      storageBucket: "hecathon-d404c.appspot.com",
+      messagingSenderId: "991837108175",
+      appId: "1:991837108175:web:7622be53936565741844ba",
+      measurementId: "G-H630EZ00RL"
+    };
+     const app = initializeApp(firebaseConfig);
+     const auth = getAuth();//===============
+    //  const db = getDatabase(app)
+    //  const storage = getStorage()//==========
+
+ document.getElementById('submit').addEventListener('click',function(e){
+    // ==================email passwod
+
+    // const auth = getAuth(app);
+    let firstName = document.getElementById('firstName')
+    let lastName = document.getElementById('lastName')
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+    let repeatPassword = document.getElementById('repeatPassword')
+
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+     const user = userCredential.user;
+     console.log(user.email);
+     alert('signup succesfully')
+
+     })
+     .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage);
+    alert('rejected')
+
+    });
+
+// ===================login
+//    let email1 = document.getElementById('email').value;
+//     let password1 = document.getElementById('password').value;
+//    const auth = getAuth();
+// signInWithEmailAndPassword(auth, email1, password1)
+//  .then((userCredential) => {
+// const user = userCredential.user;
+// console.log(user.email);
+// alert('succes')
+// })
+// .catch((error) => {
+// const errorCode = error.code;
+// const errorMessage = error.message;
+// console.log(errorCode,errorMessage);
+// alert('reject')
+// });
+
+
+
+
+
+
+
+    e.preventDefault();
+     set(ref(db,'user/'+ document.getElementById('firstName').value),
+    {
+        firstName:document.getElementById('firstName').value,
+        lastName:document.getElementById('lastName').value,
+        email:document.getElementById('email').value,
+        password:document.getElementById('password'). value,
+        repeatPassword:document.getElementById('repeatPassword').value
+        
+    })
+    alert('login succesfull !');
+ })
+
+</script>
+
+    
+</body>
+</html>

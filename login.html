@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <h1 id="heading">Signin </h1>
+    <form id="signup-form">
+      <br />
+      <br />
+      <input type="email" id="email" name="email" required placeholder="Email"/>
+      <br />
+      <input type="password" id="password" name="password" minlength="6" required placeholder="Password"/>
+      <br />
+      <br />
+      <button id="SigninBtn">Signin</button>
+    </form>
+    <!-- button -->
+    <button><a href="das.html">Goto Dashboard</a> </button><br>
+    <button><a href="index.html">Goto signup page</a> </button>
+
+
+<script type="module">
+    
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
+    // import { getDatabase,ref,set,get,child } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
+    // import {getStorage, ref as storageRef, uploadBytes, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-storage.js"
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyDHevXDhFPArnT7YT1k71j5bImLBYb1Yjc",
+          authDomain: "hecathon-d404c.firebaseapp.com",
+          projectId: "hecathon-d404c",
+          storageBucket: "hecathon-d404c.appspot.com",
+          messagingSenderId: "991837108175",
+          appId: "1:991837108175:web:7622be53936565741844ba",
+          measurementId: "G-H630EZ00RL"
+        };
+         const app = initializeApp(firebaseConfig);
+        //  const db = getDatabase(app);
+        const auth = getAuth();
+    
+    
+    const Signin = () => {
+        let SigninBtn= document.getElementById('SigninBtn')
+        SigninBtn.addEventListener('click',Signin)
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+   
+signInWithEmailAndPassword(auth, email, password)
+ .then((userCredential) => {
+const user = userCredential.user;
+console.log(user.email);
+alert('succes')
+})
+.catch((error) => {
+const errorCode = error.code;
+const errorMessage = error.message;
+console.log(errorCode,errorMessage);
+alert('reject')
+});
+}
+</script> 
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
